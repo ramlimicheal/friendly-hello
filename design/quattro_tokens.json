@@ -1,0 +1,109 @@
+{
+  "name": "Quattro",
+  "source_url": "https://quattro.framer.website",
+  "generated_at": "2026-07-05T00:34:34.627792",
+  "colors": {
+    "is_dark_theme": true,
+    "background": "#000000",
+    "foreground": "#ffffff",
+    "primary_accent": "#0099ff",
+    "accents": [
+      "#0099ff",
+      "#41ba90"
+    ],
+    "surfaces": [
+      "#a8a8a8"
+    ],
+    "muted": [
+      "#2e2e2e",
+      "#363636",
+      "#545454",
+      "#7a7a7a"
+    ],
+    "all_ranked": [
+      "#000000",
+      "#ffffff",
+      "#a8a8a8",
+      "#0f0f0f",
+      "#171717",
+      "#1f1f1f",
+      "#262626",
+      "#2e2e2e",
+      "#363636",
+      "#545454",
+      "#7a7a7a",
+      "#0099ff",
+      "#41ba90"
+    ]
+  },
+  "typography": {
+    "primary_font": "Inter",
+    "secondary_font": null,
+    "mono_font": "Space Mono",
+    "font_families": [
+      "Inter",
+      "Space Mono"
+    ],
+    "type_scale": {
+      "display": "48px",
+      "h1": "36px",
+      "h2": "28px",
+      "h3": "22px",
+      "body": "16px",
+      "caption": "13px",
+      "_note": "derived (source type scale was inconsistent)"
+    },
+    "font_weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "line_heights": [],
+    "letter_spacings": []
+  },
+  "geometry": {
+    "spacing_base": 8,
+    "spacing_scale": {
+      "space-1": "8px",
+      "space-2": "16px",
+      "space-3": "24px",
+      "space-4": "32px",
+      "space-5": "40px",
+      "space-6": "48px",
+      "space-7": "64px",
+      "space-8": "80px",
+      "space-9": "96px",
+      "space-10": "128px",
+      "space-11": "160px",
+      "space-12": "192px"
+    },
+    "radius_scale": {
+      "md": "8px",
+      "lg": "15px",
+      "xl": "24px"
+    },
+    "shadow_scale": {
+      "sm": "rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(255, 255, 255, 0.15) 0px 0px 0px 1px"
+    },
+    "gradients": [],
+    "breakpoints": {
+      "809px": "809px",
+      "810px": "810px",
+      "959px": "959px",
+      "960px": "960px",
+      "1364px": "1364px"
+    }
+  },
+  "assets": {
+    "font_files": [
+      "EO5MKE3BUDOZN44BP4HDPXAJAC2BIMCD.woff2",
+      "1ZFS7N918ojhhd0nQWdj3jz4w.woff2",
+      "DXD0Q7LSl7HEvDzucnyLnGBHM.woff2",
+      "vQyevYAyHtARFwPqUzQGpnDs.woff2",
+      "i7dPIFZifjKcF5UAWdDRYEF8RQ.woff2"
+    ],
+    "image_count": 7,
+    "icon_count": 22
+  }
+}
