@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <iframe
-      src="/quattro/index_live.html"
+      src="/quattro/index.html"
       title="Quattro"
       className="fixed inset-0 h-screen w-screen border-0"
     />
