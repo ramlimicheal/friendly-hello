@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { caseStudies } from "@/content/case-studies";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const Route = createFileRoute("/work")({
+export const Route = createFileRoute("/work/")({
   head: () => ({
     meta: [
       { title: "Work — Quattro Studio" },

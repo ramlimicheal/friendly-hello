@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { caseStudies, getCaseStudy } from "@/content/case-studies";
+import { caseStudies, getCaseStudy, type CaseStudy } from "@/content/case-studies";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -88,7 +88,7 @@ function CaseStudyPage() {
           <section ref={processRef} className="reveal grid gap-6 md:grid-cols-[160px_1fr]">
             <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Process</p>
             <ol className="space-y-4">
-              {c.process.map((step, i) => (
+              {c.process.map((step: string, i: number) => (
                 <li key={i} className="flex gap-4 border-b border-border pb-4 last:border-0">
                   <span className="text-sm tabular-nums text-primary">
                     {String(i + 1).padStart(2, "0")}
@@ -104,7 +104,7 @@ function CaseStudyPage() {
             <div>
               <p className="text-xl leading-relaxed">{c.outcome}</p>
               <dl className="mt-10 grid gap-6 sm:grid-cols-3">
-                {c.metrics.map((m) => (
+                {c.metrics.map((m: CaseStudy["metrics"][number]) => (
                   <div key={m.label} className="rounded-xl border border-border p-5">
                     <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       {m.label}
