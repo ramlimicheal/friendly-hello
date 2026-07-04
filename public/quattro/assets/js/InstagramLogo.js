@@ -38,18 +38,18 @@ var Icon = (React) => {
   }
   return IconInner;
 };
-const __FramerMetadata__ = {
+const __NexusMetadata__ = {
   exports: {
     default: {
       type: "reactComponent",
       slots: [],
-      annotations: { framerContractVersion: "1" }
+      annotations: { nexusContractVersion: "1" }
     },
-    __FramerMetadata__: { type: "variable" }
+    __NexusMetadata__: { type: "variable" }
   }
 };
 var InstagramLogo_default = Icon;
 export {
-  __FramerMetadata__,
+  __NexusMetadata__,
   InstagramLogo_default as default
 };

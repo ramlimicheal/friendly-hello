@@ -7,21 +7,21 @@ const projectIdRegex = /^\/projects\/(?<prefix>(?:(?:[A-Za-z0-9]+-)*[A-Za-z0-9]+
 const projectMatch = location.pathname.match(projectIdRegex);
 const projectId = (_a = projectMatch === null || projectMatch === void 0 ? void 0 : projectMatch.groups) === null || _a === void 0 ? void 0 : _a.id;
 const projectAccessToken = ((_b = projectMatch === null || projectMatch === void 0 ? void 0 : projectMatch.groups) === null || _b === void 0 ? void 0 : _b.accessToken) || undefined;
-let canvas = "https://framercanvas.com";
+let canvas = "https://nexuscanvas.com";
 if (projectId && hostInfo.scopeCanvas) {
 	canvas = canvas.replace("//", `//project-${projectId.toLowerCase()}.`);
 }
 const bootstrap = {
 	services: {
-		api: "https://api.framer.com",
-		app: "https://framer.com",
+		api: "https://api.nexus.com",
+		app: "https://nexus.com",
 		canvas,
-		events: "https://events.framer.com",
-		login: "https://framer.com/login",
+		events: "https://events.nexus.com",
+		login: "https://nexus.com/login",
 		userContent: "https://framerusercontent.com",
 		modulesCDN: "https://framerusercontent.com/modules",
-		modulesShortLink: "https://framer.com/m",
-		previewDomain: "framer.app",
+		modulesShortLink: "https://nexus.com/m",
+		previewDomain: "nexus.app",
 	},
 	hostInfo: {
 		version: hostInfo.version,
