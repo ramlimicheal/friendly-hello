@@ -1,67 +1,104 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { createFileRoute, Link, useServerFn } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
+import { z } from "zod";
+import { submitContact } from "@/lib/contact.functions";
+import { SiteFooter } from "@/components/SiteFooter";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+
+const Schema = z.object({
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().email().max(255),
+  message: z.string().trim().min(1).max(2000),
+});
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Quattro Studio" },
-      { name: "description", content: "Start a conversation. We reply within 24 hours." },
+      { name: "description", content: "Have a project in mind? Send a note and I'll reply within two working days." },
       { property: "og:title", content: "Contact — Quattro Studio" },
-      { property: "og:description", content: "Start a conversation. We reply within 24 hours." },
+      { property: "og:description", content: "Have a project in mind? Send a note and I'll reply within two working days." },
     ],
   }),
-  component: Contact,
+  component: ContactPage,
 });
 
-function Contact() {
+function ContactPage() {
+  const send = useServerFn(submitContact);
+  const [pending, setPending] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const parsed = Schema.safeParse({
+      name: form.get("name"),
+      email: form.get("email"),
+      message: form.get("message"),
+    });
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]?.message ?? "Invalid input");
+      return;
+    }
+    setPending(true);
+    try {
+      await send({ data: parsed.data });
+      toast.success("Message sent. I'll be in touch.");
+      e.currentTarget.reset();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setPending(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white font-['Inter',sans-serif] antialiased">
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-[#0f0f0f]/70 border-b border-white/5">
-        <nav className="mx-auto max-w-7xl px-6 md:px-10 h-16 flex items-center justify-between">
-          <Link to="/" className="text-sm font-semibold tracking-tight">Quattro<span className="text-white/40">.</span></Link>
-          <div className="flex items-center gap-8 text-sm text-white/60">
-            <Link to="/" className="hover:text-white transition-colors">Work</Link>
-            <Link to="/about" className="hover:text-white transition-colors">About</Link>
-            <Link to="/contact" className="text-white">Contact</Link>
-          </div>
-          <div className="hidden md:block w-24" />
-        </nav>
-      </header>
+    <>
+      <main className="min-h-screen bg-background text-foreground">
+        <div className="mx-auto max-w-3xl px-6 pb-24 pt-32">
+          <Link to="/" className="text-sm text-muted-foreground hover:text-foreground" data-magnetic>
+            ← Back
+          </Link>
 
-      <section className="mx-auto max-w-5xl px-6 md:px-10 pt-32 pb-24">
-        <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-8">Contact</p>
-        <h1 className="text-5xl md:text-8xl font-black leading-[0.95] tracking-tight">
-          Let's make<br />something good.
-        </h1>
+          <p className="mt-16 text-xs uppercase tracking-[0.24em] text-muted-foreground">
+            Contact — 2026
+          </p>
+          <h1 className="mt-4 text-5xl font-semibold leading-[0.95] tracking-tight sm:text-7xl">
+            Let's build <span className="text-primary">something worth shipping.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-muted-foreground">
+            Tell me about the project, the deadline, and what "done" looks like. I read every note myself and reply within two working days.
+          </p>
 
-        <div className="mt-20 grid md:grid-cols-2 gap-12 border-t border-white/10 pt-12">
-          <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Email</div>
-            <a href="mailto:hello@quattro.studio" className="text-2xl md:text-3xl font-semibold inline-flex items-center gap-2 hover:text-white/70 transition-colors">
-              hello@quattro.studio <ArrowUpRight className="h-5 w-5" />
-            </a>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Studio</div>
-            <p className="text-lg text-white/70 leading-relaxed">
-              Ostbahnhof 12<br />
-              10243 Berlin, Germany
-            </p>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Social</div>
-            <div className="flex flex-col gap-2 text-lg">
-              <a href="#" className="hover:text-white/70 transition-colors">Instagram ↗</a>
-              <a href="#" className="hover:text-white/70 transition-colors">Twitter ↗</a>
-              <a href="#" className="hover:text-white/70 transition-colors">Dribbble ↗</a>
+          <form onSubmit={onSubmit} className="mt-14 space-y-6">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <label className="block">
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Name</span>
+                <Input name="name" required maxLength={100} className="mt-2 h-12 border-border bg-background" />
+              </label>
+              <label className="block">
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Email</span>
+                <Input name="email" type="email" required maxLength={255} className="mt-2 h-12 border-border bg-background" />
+              </label>
             </div>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Response time</div>
-            <p className="text-lg text-white/70">Within 24 hours, Mon — Fri.</p>
-          </div>
+            <label className="block">
+              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Project</span>
+              <Textarea name="message" required maxLength={2000} rows={7} className="mt-2 border-border bg-background" />
+            </label>
+            <Button
+              type="submit"
+              disabled={pending}
+              data-magnetic
+              className="h-12 rounded-full bg-primary px-8 text-primary-foreground hover:bg-primary/90"
+            >
+              {pending ? "Sending…" : "Send message →"}
+            </Button>
+          </form>
         </div>
-      </section>
-    </div>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
