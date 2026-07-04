@@ -1,15 +1,23 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
 /*
  * Design system: QUATTRO
  * Extracted by NEXUS from https://quattro.framer.website
- * Theme: Dark | Font: Inter | Accent: #0099ff | Base grid: 8px
+ * Theme: Dark | Font: Inter (self-hosted) | Accent: #0099ff | Base grid: 8px
  */
+
+/* Self-hosted Inter (variable) — no external font dependency */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-variable.woff2") format("woff2");
+}
 
 /*
  * Design system definition.
