@@ -166,3 +166,22 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease-out, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide native cursor on pointer-fine devices so the custom one owns it */
+@media (pointer: fine) {
+  html, body, a, button, [role="button"], [data-magnetic] {
+    cursor: none;
+  }
+}
