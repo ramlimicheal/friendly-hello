@@ -446,16 +446,15 @@
 
   function inject(){
     if (document.getElementById(INJECT_ID)) return true;
-    // Find the visible <footer> inside #main; its parent container is the contact block wrapper.
-    var footerEl = document.querySelector('#main footer');
-    if (!footerEl || !footerEl.parentNode) return false;
-    var contactWrapper = footerEl.parentNode; // .nexus-12wm1io-container
+    // Insert clients + testimonials RIGHT AFTER the About section so they read as
+    // mid-page narrative, not part of the contact/footer block.
+    // Flow: Hero -> Work -> About -> Clients -> Testimonials -> (Framer sections) -> Contact
+    var aboutEl = document.getElementById('about');
+    if (!aboutEl || !aboutEl.parentNode) return false;
     var wrap = document.createElement('div');
     wrap.id = INJECT_ID;
     wrap.innerHTML = html;
-    // Insert BEFORE the contact/footer block so narrative flows:
-    // Hero -> Work -> Capabilities -> About -> Clients -> Testimonials -> Contact
-    contactWrapper.parentNode.insertBefore(wrap, contactWrapper);
+    aboutEl.parentNode.insertBefore(wrap, aboutEl.nextSibling);
     return true;
   }
 
