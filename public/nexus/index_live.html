@@ -383,36 +383,35 @@
 <!-- End of bodyEnd -->
 <script>
 (function(){
+  function goResume(e){
+    e.preventDefault(); e.stopPropagation();
+    var target = window.top || window;
+    try {
+      var doc = target.document;
+      var ov = doc.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;background:#0f0f0f;opacity:0;z-index:2147483647;transition:opacity 350ms ease-out;pointer-events:none;';
+      doc.body.appendChild(ov);
+      requestAnimationFrame(function(){ ov.style.opacity = '1'; });
+      setTimeout(function(){ target.location.href = '/resume'; }, 360);
+    } catch(_) { window.location.href = '/resume'; }
+  }
   function rewire(){
     document.querySelectorAll('p').forEach(function(el){
-      if((el.textContent||'').trim() === 'Download CV'){
-        el.textContent = 'Resume';
-        var t = el;
-        for(var i=0;i<6 && t && t.parentElement;i++) t = t.parentElement;
-        var host = t || el.parentElement;
-        host.style.cursor = 'pointer';
-        host.addEventListener('click', function(e){
-          e.preventDefault(); e.stopPropagation();
-          var target = window.top || window;
-          try {
-            var doc = target.document;
-            var ov = doc.createElement('div');
-            ov.style.cssText = 'position:fixed;inset:0;background:#0f0f0f;opacity:0;z-index:2147483647;transition:opacity 350ms ease-out;pointer-events:none;';
-            doc.body.appendChild(ov);
-            requestAnimationFrame(function(){ ov.style.opacity = '1'; });
-            setTimeout(function(){ target.location.href = '/resume'; }, 360);
-          } catch(_) {
-            window.location.href = '/resume';
-          }
-        }, true);
-      }
+      var txt = (el.textContent||'').trim();
+      if(txt !== 'Download CV' && txt !== 'Resume') return;
+      if(txt === 'Download CV') el.textContent = 'Resume';
+      if(el.dataset.resumeWired) return;
+      el.dataset.resumeWired = '1';
+      var t = el;
+      for(var i=0;i<6 && t && t.parentElement;i++) t = t.parentElement;
+      var host = t || el.parentElement;
+      host.style.cursor = 'pointer';
+      host.addEventListener('click', goResume, true);
     });
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', rewire);
-  } else { rewire(); }
-  setTimeout(rewire, 800);
-  setTimeout(rewire, 2000);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rewire);
+  else rewire();
+  new MutationObserver(rewire).observe(document.documentElement, {subtree:true, childList:true, characterData:true});
 })();
 </script>
 </body></html>
