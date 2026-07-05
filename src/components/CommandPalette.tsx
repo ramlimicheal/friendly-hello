@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/command";
 import { caseStudies } from "@/content/case-studies";
 
-const EMAIL = "hiremike.lee@gmail.com";
+const EMAIL = "hello@nexus.studio";
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
