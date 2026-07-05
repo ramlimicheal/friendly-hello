@@ -446,17 +446,19 @@
 
   function inject(){
     if (document.getElementById(INJECT_ID)) return true;
-    var footer = document.getElementById('footer-section');
-    if (!footer) return false;
-    // Move footer + inject sections OUTSIDE the React root (#main) so hydration can't wipe them.
+    // Find the visible <footer> inside #main; its parent container is the contact block wrapper.
+    var footerEl = document.querySelector('#main footer');
+    if (!footerEl || !footerEl.parentNode) return false;
+    var contactWrapper = footerEl.parentNode; // .nexus-12wm1io-container
     var wrap = document.createElement('div');
     wrap.id = INJECT_ID;
     wrap.innerHTML = html;
-    document.body.appendChild(wrap);
-    // Relocate footer to the very end so narrative order is: ...About -> Clients -> Testimonials -> Footer.
-    document.body.appendChild(footer);
+    // Insert BEFORE the contact/footer block so narrative flows:
+    // Hero -> Work -> Capabilities -> About -> Clients -> Testimonials -> Contact
+    contactWrapper.parentNode.insertBefore(wrap, contactWrapper);
     return true;
   }
+
 
   // Wait for Framer's React hydration to fully commit, then inject.
   // Poll for a while — hydration on some devices takes longer than `load`.
