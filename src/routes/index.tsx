@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <iframe
-      src="/nexus/index_live.html?v=ramli-20260705-2"
+      src="/nexus/index_live.html?v=ramli-20260705-freeze1"
       title="Ramli T. Michael portfolio"
       className="fixed inset-0 h-screen w-screen border-0"
     />
