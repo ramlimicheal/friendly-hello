@@ -393,8 +393,17 @@
         host.style.cursor = 'pointer';
         host.addEventListener('click', function(e){
           e.preventDefault(); e.stopPropagation();
-          try { window.top.location.href = '/resume'; }
-          catch(_) { window.location.href = '/resume'; }
+          var target = window.top || window;
+          try {
+            var doc = target.document;
+            var ov = doc.createElement('div');
+            ov.style.cssText = 'position:fixed;inset:0;background:#0f0f0f;opacity:0;z-index:2147483647;transition:opacity 350ms ease-out;pointer-events:none;';
+            doc.body.appendChild(ov);
+            requestAnimationFrame(function(){ ov.style.opacity = '1'; });
+            setTimeout(function(){ target.location.href = '/resume'; }, 360);
+          } catch(_) {
+            window.location.href = '/resume';
+          }
         }, true);
       }
     });
