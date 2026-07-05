@@ -20,7 +20,7 @@ const bootstrap = {
 		login: "https://nexus.com/login",
 		userContent: "https://framerusercontent.com",
 		modulesCDN: "https://framerusercontent.com/modules",
-		modulesShortLink: "https://nexus.com/m",
+		modulesShortLink: "https://framer.com/m",
 		previewDomain: "nexus.app",
 	},
 	hostInfo: {
