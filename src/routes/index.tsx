@@ -5,17 +5,17 @@ export const Route = createFileRoute("/")({
 });
 
 /**
- * Pixel-exact port of the ripped Quattro site.
+ * Pixel-exact Nexus homepage using the preserved dark minimal template.
  *
- * The full static rip (Framer HTML with inlined CSS + local assets) lives in
- * `public/quattro/`. We mount it in a full-viewport iframe so it renders
+ * The full static HTML with inlined CSS + local assets lives in
+ * `public/nexus/`. We mount it in a full-viewport iframe so it renders
  * byte-identical to the original, fully isolated from this app's own styles.
  */
 function Index() {
   return (
     <iframe
       src="/nexus/index_live.html"
-      title="Quattro"
+      title="Nexus"
       className="fixed inset-0 h-screen w-screen border-0"
     />
   );

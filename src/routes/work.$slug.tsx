@@ -12,15 +12,15 @@ export const Route = createFileRoute("/work/$slug")({
     loaderData
       ? {
           meta: [
-            { title: `${loaderData.title} — Quattro Studio` },
+            { title: `${loaderData.title} — Nexus` },
             { name: "description", content: loaderData.summary },
-            { property: "og:title", content: `${loaderData.title} — Quattro Studio` },
+            { property: "og:title", content: `${loaderData.title} — Nexus` },
             { property: "og:description", content: loaderData.summary },
             { property: "og:image", content: loaderData.cover },
             { name: "twitter:image", content: loaderData.cover },
           ],
         }
-      : { meta: [{ title: "Case study — Quattro Studio" }, { name: "robots", content: "noindex" }] },
+      : { meta: [{ title: "Case study — Nexus" }, { name: "robots", content: "noindex" }] },
   component: CaseStudyPage,
   notFoundComponent: CaseStudyNotFound,
   errorComponent: ({ error }) => (
