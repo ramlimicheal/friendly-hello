@@ -4,6 +4,18 @@
 <script>
 // Stub Framer CMS/query endpoints to keep static export interactive offline.
 (function(){
+  const blockedRuntimeScript = /\/assets\/js\/(?:script(?:$|\?)|script_main\.)/;
+  const removeBlockedRuntimeScript = (node) => {
+    if (node && node.tagName === 'SCRIPT' && blockedRuntimeScript.test(node.src || '')) {
+      node.type = 'application/x-nexus-runtime-disabled';
+      node.remove();
+    }
+  };
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      mutation.addedNodes && mutation.addedNodes.forEach(removeBlockedRuntimeScript);
+    }
+  }).observe(document.documentElement, { childList: true, subtree: true });
   const origFetch = window.fetch;
   window.fetch = function(input, init){
     try {
