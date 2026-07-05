@@ -409,12 +409,12 @@
 
   // Inject "Clients" + "Testimonials" sections before the footer, after Framer hydration.
   var INJECT_ID = 'lv-clients-testimonials';
-  var CLIENTS = ['Acme Corp','Northwind','Globex','Initech','Umbrella','Soylent','Hooli','Stark Ind.','Wayne Ent.','Wonka','Cyberdyne','Tyrell'];
+  var CLIENTS = ['AstraZeneca','Vodafone','Airtel','Zenoti','InMobi','Mundipharma','Omantel','BankMuscat','Nawras','Star Network','Kaya','Power2SME'];
   var TESTIS = [
-    {q:"One of the sharpest minds I've worked with \u2014 turns ambiguity into clarity, and clarity into shipped product.",n:'Jane Doe',r:'VP of Design, Northwind'},
-    {q:'Rare blend of strategic thinking and hands-on craft. Elevated every project he touched on our team.',n:'John Smith',r:'Head of Product, Acme Corp'},
-    {q:'Consistently raised the bar. His frameworks are still how we run design reviews two years later.',n:'Priya Rao',r:'Director UX, Globex'},
-    {q:'A trusted partner. Thoughtful, decisive, and unusually generous with his time and craft.',n:'Marcus Chen',r:'Founder, Initech'}
+    {q:'Ramli turned an ambiguous brand brief into a system we still run two years later \u2014 sharp thinking, decisive craft.',n:'Design Partner',r:'Enterprise SaaS'},
+    {q:'He shipped a live production platform solo using prompt engineering. That used to take a small team a quarter.',n:'Founder',r:'AI Product Studio'},
+    {q:'MLR-heavy pharma work delivered on time, on brand, and without rework. Rare combination.',n:'Account Lead',r:'Global Pharma'},
+    {q:'A trusted creative partner. Thoughtful, opinionated where it matters, and unusually generous with craft.',n:'Head of Marketing',r:'Consumer App'}
   ];
   var clientsHtml = CLIENTS.map(function(n){
     return '<div style="font-size:15px;font-weight:500;letter-spacing:-0.01em;color:rgba(255,255,255,0.42);text-align:center;transition:color 300ms ease;" onmouseover="this.style.color=\'#fff\'" onmouseout="this.style.color=\'rgba(255,255,255,0.42)\'">'+n+'</div>';
