@@ -42,7 +42,7 @@ export function CommandPalette() {
         <CommandGroup heading="Navigate">
           <CommandItem onSelect={() => go(() => navigate({ to: "/" }))}>Home</CommandItem>
           <CommandItem onSelect={() => go(() => navigate({ to: "/work" }))}>Work</CommandItem>
-          <CommandItem onSelect={() => go(() => navigate({ to: "/contact" }))}>Contact</CommandItem>
+          
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Case studies">
