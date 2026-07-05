@@ -512,6 +512,21 @@
       }
       if (next !== value) node.nodeValue = next;
     }
+    Array.prototype.forEach.call(document.querySelectorAll('h1'), function(el){
+      if (el.innerText && el.innerText.indexOf('Website Designer') !== -1) {
+        el.textContent = 'Creative Technologist and Brand Strategist';
+      }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('p, h2, h3, h4'), function(el){
+      var text = el.innerText || '';
+      if (text.indexOf('Ramli helps startups and enterprises create meaningful connections') !== -1) {
+        el.textContent = 'Ramli helps startups, enterprises, and NGOs turn brand strategy, art direction, UI/UX design, and AI-powered workflows into clear market-ready digital products.';
+      }
+      if (text.indexOf('I have 11 years of experience') !== -1) {
+        el.textContent = 'I have 18+ years of experience across brand strategy, art direction, UI/UX design, and AI-powered product development.';
+      }
+      if (text === '2011 → Now') el.textContent = '2008 → Now';
+    });
     document.title = 'Ramli T. Michael — Creative Technologist';
   }
 
