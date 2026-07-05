@@ -66,7 +66,7 @@ const recognition = [
 
 function ResumePage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground animate-fade-in [animation-duration:600ms]">
       <div className="mx-auto max-w-4xl px-6 pb-24 pt-32">
         <div className="flex items-center justify-between animate-fade-in">
           <Link
