@@ -13,7 +13,7 @@ if (projectId && hostInfo.scopeCanvas) {
 }
 const bootstrap = {
 	services: {
-		api: "https://api.nexus.com",
+		api: "https://api.framer.com",
 		app: "https://nexus.com",
 		canvas,
 		events: "https://events.nexus.com",
