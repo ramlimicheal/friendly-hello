@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html><head>
 <meta charset="utf-8"/>
+<script>
+// Stub Framer CMS/query endpoints to keep static export interactive offline.
+(function(){
+  const origFetch = window.fetch;
+  window.fetch = function(input, init){
+    try {
+      const url = typeof input === 'string' ? input : (input && input.url) || '';
+      if (/api\.framer\.com|www\.framer\.com\/api|\/api\/cms|screenshot\.framer\.invalid/.test(url)) {
+        return Promise.resolve(new Response('{"data":[],"items":[],"results":[]}', {status:200, headers:{'content-type':'application/json'}}));
+      }
+    } catch(e){}
+    return origFetch.apply(this, arguments);
+  };
+  // Prevent the runtime's "Made UI non-interactive" swap on unhandled errors.
+  window.addEventListener('error', e => { e.stopImmediatePropagation && e.stopImmediatePropagation(); }, true);
+  window.addEventListener('unhandledrejection', e => { e.preventDefault(); e.stopImmediatePropagation && e.stopImmediatePropagation(); }, true);
+})();
+</script>
 <script>try{if(localStorage.getItem("__nexus_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="assets/js/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
 <script type="importmap">{"imports":{"https://nexus.com/m/phosphor-icons/ArrowUpRight.js@0.0.57":"./assets/js/ArrowUpRight.js","https://nexus.com/m/phosphor-icons/InstagramLogo.js@0.0.57":"./assets/js/InstagramLogo.js","https://nexus.com/m/phosphor-icons/LinkedinLogo.js@0.0.57":"./assets/js/LinkedinLogo.js","https://nexus.com/m/phosphor-icons/ReadCvLogo.js@0.0.57":"./assets/js/ReadCvLogo.js","https://nexus.com/m/phosphor-icons/XLogo.js@0.0.57":"./assets/js/XLogo.js"}}</script>
 <!-- Start of headStart -->
