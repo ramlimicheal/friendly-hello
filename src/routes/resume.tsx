@@ -76,7 +76,7 @@ function ResumePage() {
           >
             ← Back
           </Link>
-          <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Resume — 2026
           </p>
         </div>
@@ -98,7 +98,7 @@ function ResumePage() {
                 key={job.role + job.company}
                 className="grid gap-4 md:grid-cols-[160px_1fr] md:gap-10"
               >
-                <span className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {job.period}
                 </span>
                 <div>
@@ -140,7 +140,7 @@ function ResumePage() {
                 key={r.label}
                 className="grid grid-cols-[80px_1fr] items-baseline gap-6 border-t border-border py-4"
               >
-                <span className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {r.year}
                 </span>
                 <span className="text-sm sm:text-base">{r.label}</span>
@@ -176,7 +176,7 @@ function ResumePage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-24 animate-fade-in">
-      <h2 className="mb-10 text-xs uppercase tracking-[0.24em] text-muted-foreground">
+      <h2 className="mb-10 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
         {title}
       </h2>
       {children}
