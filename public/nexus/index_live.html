@@ -540,4 +540,72 @@
 })();
 </script>
 
+<script>
+// Freeze headings so Framer's per-character "decoder/scramble" text effect
+// cannot cycle glyphs during hydration. Capture the SSR text once, apply
+// content replacements, then reject any subsequent child mutations for a
+// short window (the scramble runs for ~2s after hydration).
+(function(){
+  var REPLACE = [
+    ['Johnny Quattro','Ramli T. Michael'],['Johnny','Ramli'],
+    ['Website Designer and Brand Strategist','Creative Technologist and Brand Strategist'],
+    ['London, UK','Bengaluru, India'],['CET (GMT +1)','IST (GMT +5:30)']
+  ];
+  function fix(s){ for (var i=0;i<REPLACE.length;i++) s = s.split(REPLACE[i][0]).join(REPLACE[i][1]); return s; }
+
+  var SELECTOR = 'h1, h2, h3';
+  var frozen = new WeakMap();
+
+  function snapshot(){
+    document.querySelectorAll(SELECTOR).forEach(function(el){
+      if (frozen.has(el)) return;
+      var text = fix((el.textContent || '').replace(/\s+/g, ' ').trim());
+      if (!text) return;
+      frozen.set(el, text);
+      // Set final text and lock it.
+      el.textContent = text;
+    });
+  }
+
+  function enforce(el){
+    var want = frozen.get(el);
+    if (!want) return;
+    var have = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    if (have !== want) el.textContent = want;
+  }
+
+  var mo = new MutationObserver(function(muts){
+    for (var i=0; i<muts.length; i++){
+      var t = muts[i].target;
+      // Walk up to the tracked heading.
+      while (t && t !== document.body){
+        if (frozen.has(t)) { enforce(t); break; }
+        t = t.parentNode;
+      }
+    }
+  });
+
+  function attach(){
+    document.querySelectorAll(SELECTOR).forEach(function(el){
+      mo.observe(el, {childList:true, subtree:true, characterData:true});
+    });
+  }
+
+  function boot(){
+    snapshot();
+    attach();
+    // Re-snapshot a few times in case new headings appear post-hydration.
+    var t = 0;
+    (function tick(){
+      snapshot(); attach();
+      if (t++ < 20) setTimeout(tick, 250);
+      else setTimeout(function(){ mo.disconnect(); }, 2000);
+    })();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
 </body></html>
