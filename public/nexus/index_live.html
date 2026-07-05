@@ -448,22 +448,28 @@
     if (document.getElementById(INJECT_ID)) return true;
     var footer = document.getElementById('footer-section');
     if (!footer) return false;
+    // Move footer + inject sections OUTSIDE the React root (#main) so hydration can't wipe them.
     var wrap = document.createElement('div');
     wrap.id = INJECT_ID;
     wrap.innerHTML = html;
-    footer.parentNode.insertBefore(wrap, footer);
+    document.body.appendChild(wrap);
+    // Relocate footer to the very end so narrative order is: ...About -> Clients -> Testimonials -> Footer.
+    document.body.appendChild(footer);
     return true;
   }
 
-  // Try after hydration settles; retry a few times if Framer is slow.
+  // Wait for Framer's React hydration to fully commit, then inject.
+  // Poll for a while — hydration on some devices takes longer than `load`.
   var tries = 0;
   function attempt(){
-    if (inject() || tries++ > 20) return;
+    if (inject() && tries > 6) return; // ensure it survives a few hydration ticks
+    if (tries++ > 40) return;
     setTimeout(attempt, 250);
   }
-  if (document.readyState === 'complete') setTimeout(attempt, 400);
-  else window.addEventListener('load', function(){ setTimeout(attempt, 400); });
+  if (document.readyState === 'complete') setTimeout(attempt, 800);
+  else window.addEventListener('load', function(){ setTimeout(attempt, 800); });
 })();
+
 
 </script>
 
