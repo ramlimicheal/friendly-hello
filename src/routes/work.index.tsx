@@ -4,9 +4,9 @@ import { caseStudies } from "@/content/case-studies";
 export const Route = createFileRoute("/work/")({
   head: () => ({
     meta: [
-      { title: "Work — Quattro Studio" },
+      { title: "Work — Nexus" },
       { name: "description", content: "Selected case studies: brand, product, and web design that ships." },
-      { property: "og:title", content: "Work — Quattro Studio" },
+      { property: "og:title", content: "Work — Nexus" },
       { property: "og:description", content: "Selected case studies: brand, product, and web design that ships." },
     ],
   }),
