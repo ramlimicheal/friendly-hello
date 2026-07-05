@@ -179,9 +179,3 @@
   transform: translateY(0);
 }
 
-/* Hide native cursor on pointer-fine devices so the custom one owns it */
-@media (pointer: fine) {
-  html, body, a, button, [role="button"], [data-magnetic] {
-    cursor: none;
-  }
-}
