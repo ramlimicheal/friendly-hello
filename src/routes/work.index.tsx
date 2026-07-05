@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { caseStudies } from "@/content/case-studies";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const Route = createFileRoute("/work/")({
   head: () => ({
@@ -60,7 +59,6 @@ function WorkIndex() {
           </div>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }
