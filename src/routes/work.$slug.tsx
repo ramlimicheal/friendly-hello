@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { caseStudies, getCaseStudy, type CaseStudy } from "@/content/case-studies";
-import { SiteFooter } from "@/components/SiteFooter";
 import { useReveal } from "@/hooks/useReveal";
 
 export const Route = createFileRoute("/work/$slug")({
@@ -129,7 +128,6 @@ function CaseStudyPage() {
           </section>
         </div>
       </main>
-      <SiteFooter />
     </>
   );
 }
