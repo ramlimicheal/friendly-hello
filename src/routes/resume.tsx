@@ -125,7 +125,7 @@ function ResumePage() {
             {capabilities.map((c) => (
               <li
                 key={c}
-                className="border-t border-border py-3 text-sm tracking-tight transition-colors hover:text-primary sm:text-base"
+                className="border-t border-border py-3 text-sm tracking-tight text-muted-foreground transition-colors hover:text-foreground sm:text-base"
               >
                 {c}
               </li>
