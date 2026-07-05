@@ -381,4 +381,29 @@
 </div>
 <!-- Start of bodyEnd -->
 <!-- End of bodyEnd -->
+<script>
+(function(){
+  function rewire(){
+    document.querySelectorAll('p').forEach(function(el){
+      if((el.textContent||'').trim() === 'Download CV'){
+        el.textContent = 'Resume';
+        var t = el;
+        for(var i=0;i<6 && t && t.parentElement;i++) t = t.parentElement;
+        var host = t || el.parentElement;
+        host.style.cursor = 'pointer';
+        host.addEventListener('click', function(e){
+          e.preventDefault(); e.stopPropagation();
+          try { window.top.location.href = '/resume'; }
+          catch(_) { window.location.href = '/resume'; }
+        }, true);
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', rewire);
+  } else { rewire(); }
+  setTimeout(rewire, 800);
+  setTimeout(rewire, 2000);
+})();
+</script>
 </body></html>
