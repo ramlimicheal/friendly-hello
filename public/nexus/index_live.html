@@ -383,8 +383,7 @@
 <!-- End of bodyEnd -->
 <script>
 (function(){
-  function goResume(e){
-    e.preventDefault(); e.stopPropagation();
+  function goResume(){
     var target = window.top || window;
     try {
       var doc = target.document;
@@ -395,23 +394,18 @@
       setTimeout(function(){ target.location.href = '/resume'; }, 360);
     } catch(_) { window.location.href = '/resume'; }
   }
-  function rewire(){
-    document.querySelectorAll('p').forEach(function(el){
-      var txt = (el.textContent||'').trim();
-      if(txt !== 'Resume' && txt !== 'Resume') return;
-      if(txt === 'Resume') el.textContent = 'Resume';
-      if(el.dataset.resumeWired) return;
-      el.dataset.resumeWired = '1';
-      var t = el;
-      for(var i=0;i<6 && t && t.parentElement;i++) t = t.parentElement;
-      var host = t || el.parentElement;
-      host.style.cursor = 'pointer';
-      host.addEventListener('click', goResume, true);
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rewire);
-  else rewire();
-  new MutationObserver(rewire).observe(document.documentElement, {subtree:true, childList:true, characterData:true});
+  document.addEventListener('click', function(e){
+    var el = e.target;
+    for (var i = 0; i < 8 && el; i++, el = el.parentElement) {
+      var t = (el.textContent || '').trim();
+      if (t === 'Resume') {
+        e.preventDefault(); e.stopPropagation();
+        goResume();
+        return;
+      }
+    }
+  }, true);
 })();
 </script>
+
 </body></html>
