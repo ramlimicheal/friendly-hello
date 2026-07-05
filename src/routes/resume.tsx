@@ -83,7 +83,7 @@ function ResumePage() {
 
         <header className="mt-16 animate-fade-in">
           <h1 className="max-w-3xl text-5xl font-semibold leading-[0.95] tracking-tight sm:text-7xl">
-            Designer building <span className="text-primary">quiet products</span> that move numbers.
+            Designer building quiet products that move numbers.
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Nine years designing brand and product systems for fintech, wellness, and studio-scale teams.
