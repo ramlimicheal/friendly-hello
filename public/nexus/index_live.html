@@ -405,7 +405,57 @@
       }
     }
   }, true);
+
+  // Inject "Clients" + "Testimonials" sections before the footer, after Framer hydration.
+  var INJECT_ID = 'lv-clients-testimonials';
+  var html = ''
+    + '<section id="lv-clients" style="background:#000;color:#fff;padding:120px 24px;border-top:1px solid rgba(255,255,255,0.08);font-family:Inter,ui-sans-serif,system-ui,sans-serif;">'
+    +   '<div style="max-width:1200px;margin:0 auto;">'
+    +     '<p style="margin:0 0 48px;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Selected clients</p>'
+    +     '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:40px 48px;align-items:center;">'
+    +       ['Acme Corp','Northwind','Globex','Initech','Umbrella','Soylent','Hooli','Stark Ind.','Wayne Ent.','Wonka','Cyberdyne','Tyrell']
+    +         .map(function(n){return '<div style="font-size:15px;font-weight:500;letter-spacing:-0.01em;color:rgba(255,255,255,0.42);text-align:center;transition:color 300ms ease;" onmouseover="this.style.color=\'#fff\'" onmouseout="this.style.color=\'rgba(255,255,255,0.42)\'">'+n+'</div>';}).join('')
+    +     '</div>'
+    +   '</div>'
+    + '</section>'
+    + '<section id="lv-testimonials" style="background:#000;color:#fff;padding:120px 24px 160px;border-top:1px solid rgba(255,255,255,0.08);font-family:Inter,ui-sans-serif,system-ui,sans-serif;">'
+    +   '<div style="max-width:1200px;margin:0 auto;">'
+    +     '<p style="margin:0 0 64px;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Testimonials</p>'
+    +     '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:80px 72px;">'
+    +       [
+    +         {q:"One of the sharpest minds I've worked with — turns ambiguity into clarity, and clarity into shipped product.",n:'Jane Doe',r:'VP of Design, Northwind'},
+    +         {q:'Rare blend of strategic thinking and hands-on craft. Elevated every project he touched on our team.',n:'John Smith',r:'Head of Product, Acme Corp'},
+    +         {q:'Consistently raised the bar. His frameworks are still how we run design reviews two years later.',n:'Priya Rao',r:'Director UX, Globex'},
+    +         {q:'A trusted partner. Thoughtful, decisive, and unusually generous with his time and craft.',n:'Marcus Chen',r:'Founder, Initech'}
+    +       ].map(function(t){return '<figure style="margin:0;display:flex;flex-direction:column;gap:24px;">'
+    +         +'<blockquote style="margin:0;font-size:22px;line-height:1.5;color:rgba(255,255,255,0.9);font-weight:400;letter-spacing:-0.01em;">&ldquo;'+t.q+'&rdquo;</blockquote>'
+    +         +'<figcaption style="font-size:14px;color:rgba(255,255,255,0.5);"><span style="color:#fff;font-weight:500;">'+t.n+'</span> &middot; '+t.r+'</figcaption>'
+    +       +'</figure>';}).join('')
+    +     '</div>'
+    +   '</div>'
+    + '</section>';
+
+  function inject(){
+    if (document.getElementById(INJECT_ID)) return true;
+    var footer = document.getElementById('footer-section');
+    if (!footer) return false;
+    var wrap = document.createElement('div');
+    wrap.id = INJECT_ID;
+    wrap.innerHTML = html;
+    footer.parentNode.insertBefore(wrap, footer);
+    return true;
+  }
+
+  // Try after hydration settles; retry a few times if Framer is slow.
+  var tries = 0;
+  function attempt(){
+    if (inject() || tries++ > 20) return;
+    setTimeout(attempt, 250);
+  }
+  if (document.readyState === 'complete') setTimeout(attempt, 400);
+  else window.addEventListener('load', function(){ setTimeout(attempt, 400); });
 })();
+
 </script>
 
 </body></html>
