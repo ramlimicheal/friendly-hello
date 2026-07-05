@@ -83,7 +83,7 @@ function ResumePage() {
 
         <header className="mt-16 animate-fade-in">
           <h1 className="max-w-3xl text-5xl font-semibold leading-[0.95] tracking-tight sm:text-7xl">
-            Designer building <span className="text-primary">quiet products</span> that move numbers.
+            Designer building quiet products that move numbers.
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Nine years designing brand and product systems for fintech, wellness, and studio-scale teams.
@@ -125,7 +125,7 @@ function ResumePage() {
             {capabilities.map((c) => (
               <li
                 key={c}
-                className="border-t border-border py-3 text-sm tracking-tight transition-colors hover:text-primary sm:text-base"
+                className="border-t border-border py-3 text-sm tracking-tight text-muted-foreground transition-colors hover:text-foreground sm:text-base"
               >
                 {c}
               </li>
@@ -153,7 +153,7 @@ function ResumePage() {
           <div className="flex flex-wrap items-center gap-6 text-sm sm:text-base">
             <a
               href="mailto:hello@nexus.studio"
-              className="text-foreground underline underline-offset-4 transition-colors hover:text-primary"
+              className="text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
               data-magnetic
             >
               hello@nexus.studio
