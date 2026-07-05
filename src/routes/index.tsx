@@ -16,7 +16,7 @@ function Index() {
       <iframe
         src="/nexus/index_live.html"
         title="Nexus"
-        className="block h-screen w-full border-0"
+        className="block h-[92vh] w-full border-0"
       />
 
       {/* Client logos */}
