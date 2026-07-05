@@ -153,7 +153,7 @@ function ResumePage() {
           <div className="flex flex-wrap items-center gap-6 text-sm sm:text-base">
             <a
               href="mailto:hello@nexus.studio"
-              className="text-foreground underline underline-offset-4 transition-colors hover:text-primary"
+              className="text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
               data-magnetic
             >
               hello@nexus.studio
