@@ -475,4 +475,54 @@
 
 </script>
 
+<script>
+(function(){
+  var replacements = [
+    ['Johnny Quattro', 'Ramli T. Michael'],
+    ['Johnny', 'Ramli'],
+    ['I Connect with creators and builders to design and develop Nexus websites reaching goals and delivering the message', 'I partner with founders and teams to design brands, ship AI-powered products, and turn ideas into live platforms.'],
+    ['Website Designer and Brand Strategist', 'Creative Technologist and Brand Strategist'],
+    ['London, UK', 'Bengaluru, India'],
+    ['CET (GMT +1)', 'IST (GMT +5:30)'],
+    ['Johnny helps startups and enterprises create meaningful connections between their products and customers. With a focus on ethical practices, he streamlines publishing workflows and empowers businesses to achieve their goals while fostering lasting customer engagement.', 'Ramli helps startups, enterprises, and NGOs turn brand strategy, design systems, and AI-powered workflows into clear market-ready digital products.'],
+    ['I have 11 years of experience running successful design practices together with startups and top brands.', 'I have 18+ years of experience across brand strategy, art direction, UI/UX design, and AI-powered product development.'],
+    ['Quattro Inc.', 'Independent Studio'],
+    ['Google', 'Iris Interactive'],
+    ['Meta', 'Maverick'],
+    ['PayPal', 'TradeForge'],
+    ['Product Designer', 'Creative Technologist'],
+    ['Senior Designer', 'Creative Director'],
+    ['Design Lead', 'Creative Lead'],
+    ['Remix Supply', 'Bible Decoder'],
+    ['Nitro', 'TradeForge'],
+    ['Bravo', 'Maverick'],
+    ['Hanzo Co.', 'AI Product Studio'],
+    ['Hanzo', 'Brand Systems'],
+    ['Haze', 'Campaign Lab']
+  ];
+
+  function normalizeText(){
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var value = node.nodeValue;
+      var next = value;
+      for (var i = 0; i < replacements.length; i++) {
+        next = next.split(replacements[i][0]).join(replacements[i][1]);
+      }
+      if (next !== value) node.nodeValue = next;
+    }
+    document.title = 'Ramli T. Michael — Creative Technologist';
+  }
+
+  var tries = 0;
+  function run(){
+    normalizeText();
+    if (tries++ < 32) setTimeout(run, 250);
+  }
+  if (document.readyState === 'complete') run();
+  else window.addEventListener('load', run);
+})();
+</script>
+
 </body></html>
